@@ -25,6 +25,7 @@ class _FitnessAppState extends State<FitnessApp> {
       appBar: AppBar(title: Text('Fitness App')),
       body: Column(
         children: [
+          SizedBox(height: 10,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [ElevatedButton(
