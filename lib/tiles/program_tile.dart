@@ -6,7 +6,8 @@ class ProgramTile extends StatefulWidget {
   String program;
   final int index;
  VoidCallback callback;
-  ProgramTile({required this.program, required this.callback, required this.index});
+ List <String> exercises;
+  ProgramTile({required this.program, required this.callback, required this.index, required this.exercises});
 
   @override
   State<ProgramTile> createState() => _ProgramTileState();
@@ -18,6 +19,7 @@ class _ProgramTileState extends State<ProgramTile> {
   FocusNode focusNode= FocusNode();
   bool isEditing = false;
   bool isExpanded = false;
+  String exercise='Crunch';
   @override
   void initState() {
     super.initState();
@@ -111,14 +113,46 @@ class _ProgramTileState extends State<ProgramTile> {
                 ],
               ),
             ),
+
             if (isExpanded)
               Padding(
                 padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
                      vertical: 8.0),
                 child: Column(
                   children: [
-                    for (var exercise in exercises)
-                      ExerciseTile(exerciseName: exercise.exerciseName)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        DropdownButton(
+                          menuMaxHeight: 120,
+                          value: exercise,
+                          hint: Text('Add Exercise'),
+                          items: exercises.map((String exercise) {
+                            return DropdownMenuItem(
+                              value: exercise,
+                              child: Text(exercise),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              exercise= newValue!;
+                            });
+                          },
+                        ),
+                        IconButton(onPressed: (){
+                            widget.exercises.add(exercise);
+                            setState(() {});
+                        }, icon: Icon(Icons.add))
+                      ],
+                    ),
+
+                    for (var exercise in widget.exercises)
+                      ExerciseTile(exerciseName: exercise,index: widget.exercises.indexOf(exercise),
+                      deleteExercise: (){
+                        widget.exercises.removeAt(widget.exercises.indexOf(exercise));
+                        setState(() {});
+                      },)
                   ],
                 )
               ),

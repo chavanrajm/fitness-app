@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:untitled1/main_screen.dart';
 
 class ExerciseTile extends StatefulWidget {
   String exerciseName;
-   ExerciseTile({required this.exerciseName});
+  int index;
+  VoidCallback deleteExercise;
+   ExerciseTile({required this.exerciseName, required this.index, required this.deleteExercise});
   @override
   State<ExerciseTile> createState() => _ExerciseTileState();
 }
@@ -39,7 +42,9 @@ class _ExerciseTileState extends State<ExerciseTile> {
             children: [
             IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
               SizedBox(width: 3.0),
-            IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+            IconButton(onPressed: (){
+              widget.deleteExercise();
+            }, icon: Icon(Icons.delete)),
           ],)
         ],
       ),
