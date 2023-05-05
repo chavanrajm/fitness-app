@@ -28,24 +28,37 @@ class _ExerciseTileState extends State<ExerciseTile> {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            widget.exerciseName,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+          Flexible(
+            child: Image(
+              image: AssetImage('assets/download.jpg'),
             ),
           ),
-          Row(
-            children: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
-              SizedBox(width: 3.0),
-            IconButton(onPressed: (){
-              widget.deleteExercise();
-            }, icon: Icon(Icons.delete)),
-          ],)
+         Flexible(
+           flex: 4,
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.spaceAround,
+             children: [
+               Text(
+                 widget.exerciseName,
+                 style: TextStyle(
+                   fontSize: 18,
+                   fontWeight: FontWeight.bold,
+                   color: Colors.black,
+                 ),
+               ),
+               Row(
+                 children: [
+                   IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                   SizedBox(width: 3.0),
+                   IconButton(onPressed: (){
+                     widget.deleteExercise();
+                   }, icon: Icon(Icons.delete)),
+                 ],)
+             ],
+           ),
+         )
         ],
       ),
     );
